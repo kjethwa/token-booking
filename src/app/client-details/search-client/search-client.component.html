@@ -1,0 +1,83 @@
+
+
+<h6>Search</h6>
+<form [formGroup]="searchForm">
+  <div class="row">
+    <div class="col-md-3 col-sm-4 mb-md">
+      <label>Client Name</label>
+      <input type="text" class="form-control" formControlName="clientName">
+    </div>
+
+    <div class="col-md-3 col-sm-4">
+      <label>Owner Name</label>
+      <input type="text" class="form-control" formControlName="ownerName">
+    </div>
+
+    <div class="col-md-3 col-sm-4">
+      <label>Category</label>
+      <select class="form-control" formControlName="category">
+        <option value="">Select</option>
+        <option value="Clinic">Clinic</option>
+        <option value="Grocery">Grocery</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 col-sm-4">
+      <label>State</label>
+      <select class="form-control" formControlName="state">
+        <option value="">Select</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Goa">Goa</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 col-sm-4">
+      <label>City</label>
+      <select class="form-control" formControlName="city">
+        <option value="">Select</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Panaji">Panaji</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 col-sm-4">
+      <label>Status</label>
+      <select class="form-control" formControlName="status">
+        <option value="">Select</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 col-sm-4 d-flex align-items-end">
+      <button class="btn btn-primary mr-sm" (click)="onSearchClick(searchForm)"><i class="fa fa-search"></i></button>
+      <button class="btn btn-primary" (click)="onResetClick()"><i class="fa fa-refresh"></i></button>
+    </div>
+  </div>
+</form>
+
+<div class="mt-md mb-md">
+  <h6>Search Grid</h6>
+</div>
+<table class="table table-stripped table-bordered">
+  <thead>
+    <tr>
+      <th>Client Name</th>
+      <th>Owner Name</th>
+      <th>Category</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let records of clientRecords;let i = index">
+      <td>{{records?.clientName}}</td>
+      <td>{{records?.ownerName}}</td>
+      <td>{{records?.category}}</td>
+      <td>{{records?.state}}</td>
+      <td>{{records?.city}}</td>
+      <td>{{records?.state}}</td>
+    </tr>
+  </tbody>
+</table>
