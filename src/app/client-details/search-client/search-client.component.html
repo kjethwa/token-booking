@@ -59,8 +59,8 @@
 <div class="mt-md mb-md">
   <h6>Search Grid</h6>
 </div>
-<table class="table table-stripped table-bordered">
-  <thead>
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
     <tr>
       <th>Client Name</th>
       <th>Owner Name</th>
@@ -72,7 +72,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let records of clientRecords;let i = index">
-      <td>{{records?.clientName}}</td>
+      <td><button class="btn btn-link" (click)="onViewClick(records)">{{records?.clientName}}</button></td>
       <td>{{records?.ownerName}}</td>
       <td>{{records?.category}}</td>
       <td>{{records?.state}}</td>
@@ -81,3 +81,11 @@
     </tr>
   </tbody>
 </table>
+
+<div class="row mt-lg">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-primary mr-sm" routerLink="/add"><i class="fa fa-plus">Add Client</i></button>
+    <!--<button class="btn btn-secondary">Cancel</button>-->
+  </div>
+</div>
+

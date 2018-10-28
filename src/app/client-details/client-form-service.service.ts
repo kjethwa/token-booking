@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
+import { Validators } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ClientFormServiceService {
 
   createSearchForm() {
     return this._fb.group({
-      clientName : '',
+      clientName : [''],
       ownerName : '',
       category : '',
       state : '',

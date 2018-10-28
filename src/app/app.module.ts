@@ -6,13 +6,15 @@ import { SearchClientComponent } from './client-details/search-client/search-cli
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddClientComponent } from './client-details/add-client/add-client.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchClientComponent,
-    LoginComponent
+    LoginComponent,
+    AddClientComponent
   ],
   imports: [
     BrowserModule,
