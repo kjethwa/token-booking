@@ -1,20 +1,21 @@
 <h6>Add Client</h6>
+<form [formGroup]="clientAddForm">
 <div class="row">
   <div class="col-md-3 col-sm-4 mb-md">
     <label>Client Name</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="clientName"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Owner FirstName</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="ownerFirstName"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Owner LastName</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="ownerLastName"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Category</label>
-    <select  class="form-control">
+    <select  class="form-control" formControlName="clientCategory">
       <option value="">Select</option>
       <option value="Clinic">Clinic</option>
       <option value="Store">Store</option>
@@ -25,49 +26,49 @@
 <div class="row">
   <div class="col-md-3 col-sm-4 md-md">
     <label>House No.</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="houseNo"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Street</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="street"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Street1</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="street1"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Street2</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="street2"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Street3</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="street3"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Street4</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="street4"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>pincode</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="pincode"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>Country</label>
-    <select  class="form-control">
+    <select  class="form-control" formControlName="country">
       <option value="" >Select</option>
       <option value="India">India</option>
     </select>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>State</label>
-    <select  class="form-control">
+    <select  class="form-control" formControlName="state">
       <option value="" >Select</option>
       <option value="Maharashra">Maharashtra</option>
     </select>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>City</label>
-    <select  class="form-control">
+    <select  class="form-control" formControlName="city">
       <option value="" >Select</option>
       <option value="Mumbai">Mumbai</option>
     </select>
@@ -82,13 +83,15 @@
 <div class="row">
   <div class="col-md-3 col-sm-4">
     <label>Longitude</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="longitude"/>
   </div>
   <div class="col-md-3 col-sm-4">
     <label>latitude</label>
-    <input type="text" class="form-control"/>
+    <input type="text" class="form-control" formControlName="latitude"/>
   </div>
 </div>
+
+
 <div class="mt-md mb-md">
   <h6>Days of Operation</h6>
 </div>
@@ -119,6 +122,8 @@
     <input type="time" class="form-control"/>
   </div>
   <div class="col-md-3 col-sm-5 d-flex align-items-end">
-    <button class="btn btn-primary mr-sm" ><i >Add</i></button>
+    <button class="btn btn-primary mr-sm" (click)="onAddClick(clientAddForm)"><i>Add</i></button>
   </div>
 </div>
+
+</form>

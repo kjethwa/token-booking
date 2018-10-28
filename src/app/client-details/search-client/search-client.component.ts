@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { ClientFormServiceService } from "src/app/client-details/client-form-service.service";
+import { ClientFormServiceService } from "src/app/client-details/service/client-form-service.service";
 import { Router } from "@angular/router";
 import * as _ from 'lodash';
 
