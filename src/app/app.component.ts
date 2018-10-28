@@ -10,9 +10,5 @@ import { Router } from "@angular/router";
 export class AppComponent {
   constructor(private router: Router) {}
   title = 'token-booking';
-
-  onSignClick() {
-    this.router.navigate(['search']);
-  }
 }
 
