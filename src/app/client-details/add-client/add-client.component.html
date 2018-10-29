@@ -21,10 +21,26 @@
       <option value="Store">Store</option>
     </select>
   </div>
+
+  <div class="col-md-3 col-sm-4">
+    <label>Status</label>
+    <select  class="form-control" formControlName="status">
+      <option value="" >Select</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
+  </div>
 </div>
-<h6>Address</h6>
+
+  <div class="row mt-md mb-md">
+    <div class="col-sm-12">
+      <h6>Address</h6>
+    </div>
+  </div>
+
+
 <div class="row">
-  <div class="col-md-3 col-sm-4 md-md">
+  <div class="col-md-3 col-sm-4 mb-md">
     <label>House No.</label>
     <input type="text" class="form-control" formControlName="houseNo"/>
   </div>
@@ -49,10 +65,10 @@
     <input type="text" class="form-control" formControlName="street4"/>
   </div>
   <div class="col-md-3 col-sm-4">
-    <label>pincode</label>
+    <label>Pincode</label>
     <input type="text" class="form-control" formControlName="pincode"/>
   </div>
-  <div class="col-md-3 col-sm-4">
+  <div class="col-md-3 col-sm-4 mb-md">
     <label>Country</label>
     <select  class="form-control" formControlName="country">
       <option value="" >Select</option>
@@ -74,7 +90,7 @@
     </select>
   </div>
   <div class="col-md-3 col-sm-4 d-flex align-items-end">
-    <button class="btn btn-primary mr-sm" ><i >Geolocation Search</i></button>
+    <button class="btn btn-primary mr-sm" ><i class="fa fa-search">Geolocation Search</i></button>
   </div>
 </div>
 <div class="mt-md mb-md">
@@ -95,35 +111,70 @@
 <div class="mt-md mb-md">
   <h6>Days of Operation</h6>
 </div>
-<div class="row">
-  <div class="col-md-3 col-sm-4">
-    <label>Day of Week</label>
-    <select  class="form-control">
-      <option value="" >Select</option>
-      <option value="Monday">Monday</option>
-      <option value="Tuesday">Tuesday</option>
-      <option value="Wednesday">Wednesday</option>
-      <option value="Thursday">Thursday</option>
-      <option value="Friday">Friday</option>
-      <option value="Saturday">Saturday</option>
-      <option value="Sunday">Sunday</option>
-    </select>
-  </div>
-  <div class="col-md-3 col-sm-4">
-    <label>No. of Tokens allowed</label>
-    <input type="text" class="form-control"/>
-  </div>
-  <div class="col-md-3 col-sm-4">
-    <label>From Time</label>
-    <input type="time" class="form-control"/>
-  </div>
-  <div class="col-md-3 col-sm-4">
-    <label>To Time</label>
-    <input type="time" class="form-control"/>
-  </div>
-  <div class="col-md-3 col-sm-5 d-flex align-items-end">
-    <button class="btn btn-primary mr-sm" (click)="onAddClick(clientAddForm)"><i>Add</i></button>
+  <form [formGroup]="clientOperationForm">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <label>Day of Week</label>
+        <select class="form-control" formControlName="day">
+          <option value="">Select</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <label>No. of Tokens allowed</label>
+        <input type="text" class="form-control" formControlName="noOfTokens"/>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <label>From Time</label>
+        <input type="time" class="form-control" formControlName="fromTime"/>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <label>To Time</label>
+        <input type="time" class="form-control" formControlName="toTime"/>
+      </div>
+      <div class="col-sm-12 text-right mt-md mb-md">
+        <button class="btn btn-primary mr-sm" (click)="onAddClick(clientOperationForm)"><i class="fa fa-plus">Add</i></button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Days of Week</th>
+      <th>No of Tokens</th>
+      <th>From Time</th>
+      <th>To Time</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let daysofOperations of clientAddForm.get('daysOfOperation').value;let i = index">
+      <td>{{daysofOperations.day}}</td>
+      <td>{{daysofOperations.noOfTokens}}</td>
+      <td>{{daysofOperations.fromTime}}</td>
+      <td>{{daysofOperations.toTime}}</td>
+      <td><button class="btn" (click)="onEditDaysOfOperations(daysofOperations, i)"><i class="fa fa-pencil-square-o"></i></button>
+          <button class="btn" (click)="onDeleteDaysOfOperations(i)"><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+
+    <tr *ngIf="!clientAddForm.get('daysOfOperation').value.length">
+      <td colspan="5" class="text-center"><b>No Data to Show</b></td>
+    </tr>
+    </tbody>
+  </table>
+</form>
+
+<div class="row mt-lg">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-primary mr-sm" (click)="onSaveClientClick()"><i class="fa fa-plus">Save Client</i></button>
+    <button class="btn btn-secondary" routerLink="/search">Cancel</button>
   </div>
 </div>
-
-</form>

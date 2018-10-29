@@ -38,7 +38,8 @@ export class ClientFormServiceService {
       state : '',
       city : '',
       latitude : '',
-      longitude : ''
+      longitude : '',
+      daysOfOperation : this._fb.array([])
     });
   }
 
