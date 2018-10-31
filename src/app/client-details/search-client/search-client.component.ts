@@ -15,39 +15,13 @@ export class SearchClientComponent implements OnInit {
   originalRecord = {
       clientName : '',
       ownerName : '',
-      category : '',
+      clientCategory : '',
       state : '',
       city : '',
       status : ''
   };
   clientRecords: any = [];
-  // clientRecords = [{
-  //   clientId : 1,
-  //   clientName : 'Jethwa Clinic',
-  //   ownerName : 'Dr. Kalpesh Jethwa',
-  //   category : 'Clinic',
-  //   state : 'Maharashtra',
-  //   city : 'Mumbai',
-  //   status : 'Active'
-  // },
-  // {
-  //   clientId : 2,
-  //   clientName : 'Jethwa Clinic',
-  //   ownerName : 'Dr. Kalpesh Jethwa',
-  //   category : 'Clinic',
-  //   state : 'Maharashtra',
-  //   city : 'Mumbai',
-  //   status : 'Active'
-  // },
-  // {
-  //   clientId : 3,
-  //   clientName : 'DEF',
-  //   ownerName : 'Dr. Ramesh Shah',
-  //   category : 'Grocery',
-  //   state : 'Maharashtra',
-  //   city : 'Jalgaon',
-  //   status : 'Active'
-  // }];
+
   constructor(private _formService : ClientFormServiceService,
               private _router : Router,
               private _clientService : ClientServiceService) { }
@@ -62,9 +36,11 @@ export class SearchClientComponent implements OnInit {
       alert('Please enter atleast one parameter to search');
       return;
     }
-    this._clientService.getSearchResults().subscribe((response) => {
-        console.log(response);
-        this.clientRecords = response;
+    const searchParam = this.searchForm.getRawValue();
+    console.log(searchParam);
+    this._clientService.getSearchResults(searchParam).subscribe((response) => {
+      console.log(response);
+      this.clientRecords = response;
     })
     console.log('form', form.value);
   }
