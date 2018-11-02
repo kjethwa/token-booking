@@ -72,7 +72,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let records of clientRecords;let i = index">
-      <td><button class="btn btn-link" (click)="onViewClick(records)">{{records?.clientName}}</button></td>
+      <td><button class="btn btn-link" (click)="onViewClick(records)">{{records?.clientName }}</button></td>
       <td>{{records?.ownerFirstName}} {{records?.ownerLastName}}</td>
       <td>{{records?.clientCategory}}</td>
       <td>{{records?.state}}</td>

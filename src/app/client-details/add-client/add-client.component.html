@@ -174,7 +174,8 @@
 
 <div class="row mt-lg">
   <div class="col-sm-12 text-center">
-    <button class="btn btn-primary mr-sm" (click)="onSaveClientClick()"><i class="fa fa-plus">Save Client</i></button>
+    <button *ngIf="client?.clientId==undefined" class="btn btn-primary mr-sm" (click)="onSaveClientClick()"><i class="fa fa-plus">Save Client</i></button>
+    <button *ngIf="client?.clientId" class="btn btn-primary mr-sm" (click)="onUpdateClientClick()"><i class="fa fa-plus">Update Client</i></button>
     <button class="btn btn-secondary" routerLink="/search">Cancel</button>
   </div>
 </div>

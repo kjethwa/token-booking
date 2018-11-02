@@ -13,7 +13,7 @@ export class ClientFormServiceService {
     return this._fb.group({
       clientName : [''],
       ownerName : '',
-      category : '',
+      clientCategory : '',
       state : '',
       city : '',
       status : ''

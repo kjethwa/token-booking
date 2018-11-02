@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormGroup} from "@angular/forms";
 import {ClientFormServiceService} from "../service/client-form-service.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Client} from "../../model/Client";
-import {ClientOperation} from "../../model/ClientOperaion";
 import {ClientServiceService} from "../service/client-service.service";
+import {ClientOperation} from "../../model/ClientOperaion";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-add-client',
@@ -20,17 +21,18 @@ export class AddClientComponent implements OnInit {
 
   constructor(private _formService: ClientFormServiceService,
               private _router: Router,
-              private _clientService : ClientServiceService) {
+              private _clientService: ClientServiceService,
+              private _activatedRoute: ActivatedRoute) {
+
   }
 
   ngOnInit() {
-    this.client = new Client();
     this.clientAddForm = this._formService.createClientForm();
     this.clientOperationForm = this._formService.createClientOperationForm();
+    this._activatedRoute.params.subscribe( params => this.getClient(params['id']));
   }
 
   onAddClick(form){
-
     if (this.editIndex > -1) {
       ((<FormArray>this.clientAddForm.get('daysOfOperation')).at(this.editIndex)).patchValue(form.value);
       this.editIndex = -1;
@@ -40,7 +42,6 @@ export class AddClientComponent implements OnInit {
       (<FormArray>this.clientAddForm.get('daysOfOperation')).push(instance);
     }
     this.clientOperationForm.reset();
-    // this.clientOperationForm = this._formService.createClientOperationForm();
     console.log('form', this.clientAddForm);
   }
 
@@ -62,4 +63,28 @@ export class AddClientComponent implements OnInit {
     })
   }
 
+  private getClient(id: string) {
+    this._clientService.getClientById(id).subscribe(response => {
+      this.clientAddForm.patchValue(response);
+      this.client = <Client> response;
+
+      for(let i=0;i<this.client.daysOfOperation.length;i++){
+          this.addDaysOfOperation(this.client.daysOfOperation[i]);
+      }
+    });
+  }
+
+  private addDaysOfOperation(value){
+    const instance = this._formService.createClientOperationForm();
+    instance.patchValue(value);
+    (<FormArray>this.clientAddForm.get('daysOfOperation')).push(instance);
+  }
+
+  onUpdateClientClick() {
+    const clientDetails = this.clientAddForm.getRawValue();
+
+    this._clientService.updateClient(clientDetails).subscribe((res) => {
+      console.log(res);
+    })
+  }
 }
