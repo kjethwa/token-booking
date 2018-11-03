@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
-import {Client} from "../../model/Client";
+import {Client} from "../model/Client";
 
 @Injectable({
   providedIn: 'root'

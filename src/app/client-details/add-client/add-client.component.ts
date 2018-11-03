@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormGroup} from "@angular/forms";
-import {ClientFormServiceService} from "../service/client-form-service.service";
+import {ClientFormServiceService} from "../../service/client-form-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Client} from "../../model/Client";
-import {ClientServiceService} from "../service/client-service.service";
+import {ClientServiceService} from "../../service/client-service.service";
 import {ClientOperation} from "../../model/ClientOperaion";
 import {forEach} from "@angular/router/src/utils/collection";
+import {PropertySericeService} from "../../service/property-serice.service";
 
 @Component({
   selector: 'app-add-client',
@@ -18,11 +19,13 @@ export class AddClientComponent implements OnInit {
   clientAddForm: FormGroup;
   clientOperationForm: FormGroup;
   client: Client;
+  clientCategory: any;
 
   constructor(private _formService: ClientFormServiceService,
               private _router: Router,
               private _clientService: ClientServiceService,
-              private _activatedRoute: ActivatedRoute) {
+              private _activatedRoute: ActivatedRoute,
+              private _propertyService : PropertySericeService) {
 
   }
 
@@ -30,6 +33,9 @@ export class AddClientComponent implements OnInit {
     this.clientAddForm = this._formService.createClientForm();
     this.clientOperationForm = this._formService.createClientOperationForm();
     this._activatedRoute.params.subscribe( params => this.getClient(params['id']));
+    this._propertyService.getAllClientCategory().subscribe(response => {
+      this.clientCategory = response;
+    });
   }
 
   onAddClick(form){
@@ -64,14 +70,16 @@ export class AddClientComponent implements OnInit {
   }
 
   private getClient(id: string) {
-    this._clientService.getClientById(id).subscribe(response => {
-      this.clientAddForm.patchValue(response);
-      this.client = <Client> response;
+    if (id != undefined && id != "") {
+      this._clientService.getClientById(id).subscribe(response => {
+        this.clientAddForm.patchValue(response);
+        this.client = <Client> response;
 
-      for(let i=0;i<this.client.daysOfOperation.length;i++){
+        for (let i = 0; i < this.client.daysOfOperation.length; i++) {
           this.addDaysOfOperation(this.client.daysOfOperation[i]);
-      }
-    });
+        }
+      });
+    }
   }
 
   private addDaysOfOperation(value){

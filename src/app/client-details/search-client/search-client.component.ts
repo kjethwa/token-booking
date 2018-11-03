@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { ClientFormServiceService } from "src/app/client-details/service/client-form-service.service";
+import { ClientFormServiceService } from "src/app/service/client-form-service.service";
 import { Router } from "@angular/router";
 import * as _ from 'lodash';
-import {ClientServiceService} from "../service/client-service.service";
+import {ClientServiceService} from "../../service/client-service.service";
+import {PropertySericeService} from "../../service/property-serice.service";
+import {a} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-search-client',
@@ -21,13 +23,18 @@ export class SearchClientComponent implements OnInit {
       status : ''
   };
   clientRecords: any = [];
+  clientCategory: any;
 
   constructor(private _formService : ClientFormServiceService,
               private _router : Router,
-              private _clientService : ClientServiceService) { }
+              private _clientService : ClientServiceService,
+              private _propertyService : PropertySericeService) { }
 
   ngOnInit() {
     this.searchForm = this._formService.createSearchForm();
+    this._propertyService.getAllClientCategory().subscribe(response => {
+      this.clientCategory = response;
+    });
   }
 
   onSearchClick(form) {
@@ -38,7 +45,7 @@ export class SearchClientComponent implements OnInit {
     }
     const searchParam = this.searchForm.getRawValue();
     console.log(searchParam);
-    this._clientService.getSearchResults(searchParam).subscribe((response) => {
+    this._clientService.getSearchResults("").subscribe((response) => {
       console.log(response);
       this.clientRecords = response;
     })
@@ -50,7 +57,7 @@ export class SearchClientComponent implements OnInit {
     this.searchForm.patchValue(this.originalRecord);
   }
 
-  onViewClick(record) {
-    this._router.navigate(['view', record.clientId])
+  onEditClick(record) {
+    this._router.navigate(['edit', record.clientId])
   }
 }

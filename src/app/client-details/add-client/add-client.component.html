@@ -16,9 +16,7 @@
   <div class="col-md-3 col-sm-4">
     <label>Category</label>
     <select  class="form-control" formControlName="clientCategory">
-      <option value="">Select</option>
-      <option value="Clinic">Clinic</option>
-      <option value="Store">Store</option>
+      <option *ngFor="let value of clientCategory" value="{{ value }}">{{ value }}</option>
     </select>
   </div>
 
