@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormGroup} from "@angular/forms";
-import {ClientFormServiceService} from "../../service/client-form-service.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Client} from "../../model/Client";
-import {ClientServiceService} from "../../service/client-service.service";
-import {ClientOperation} from "../../model/ClientOperaion";
-import {forEach} from "@angular/router/src/utils/collection";
-import {PropertySericeService} from "../../service/property-serice.service";
+import { FormArray, FormGroup } from "@angular/forms";
+import { ClientFormServiceService } from "../../service/client-form-service.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Client } from "../../model/Client";
+import { ClientServiceService } from "../../service/client-service.service";
+import { ClientOperation } from "../../model/ClientOperaion";
+import { forEach } from "@angular/router/src/utils/collection";
+import { PropertySericeService } from "../../service/property-serice.service";
 
 @Component({
   selector: 'app-add-client',
@@ -22,23 +22,23 @@ export class AddClientComponent implements OnInit {
   clientCategory: any;
 
   constructor(private _formService: ClientFormServiceService,
-              private _router: Router,
-              private _clientService: ClientServiceService,
-              private _activatedRoute: ActivatedRoute,
-              private _propertyService : PropertySericeService) {
+    private _router: Router,
+    private _clientService: ClientServiceService,
+    private _activatedRoute: ActivatedRoute,
+    private _propertyService: PropertySericeService) {
 
   }
 
   ngOnInit() {
     this.clientAddForm = this._formService.createClientForm();
     this.clientOperationForm = this._formService.createClientOperationForm();
-    this._activatedRoute.params.subscribe( params => this.getClient(params['id']));
+    this._activatedRoute.params.subscribe(params => this.getClient(params['id']));
     this._propertyService.getAllClientCategory().subscribe(response => {
       this.clientCategory = response;
     });
   }
 
-  onAddClick(form){
+  onAddClick(form) {
     if (this.editIndex > -1) {
       ((<FormArray>this.clientAddForm.get('daysOfOperation')).at(this.editIndex)).patchValue(form.value);
       this.editIndex = -1;
@@ -63,17 +63,21 @@ export class AddClientComponent implements OnInit {
   onSaveClientClick() {
     const clientDetails = this.clientAddForm.getRawValue();
     console.log('clientDetails', clientDetails);
+    if (this.clientAddForm.valid && this.clientAddForm.get('daysOfOperation').value.length > 0) {
+      this._clientService.addClients(clientDetails).subscribe((res) => {
+        console.log(res);
+      })
+    } else {
+      alert('Please enter mandatory fields');
+    }
 
-    this._clientService.addClients(clientDetails).subscribe((res) => {
-      console.log(res);
-    })
   }
 
   private getClient(id: string) {
     if (id != undefined && id != "") {
       this._clientService.getClientById(id).subscribe(response => {
         this.clientAddForm.patchValue(response);
-        this.client = <Client> response;
+        this.client = <Client>response;
 
         for (let i = 0; i < this.client.daysOfOperation.length; i++) {
           this.addDaysOfOperation(this.client.daysOfOperation[i]);
@@ -82,7 +86,7 @@ export class AddClientComponent implements OnInit {
     }
   }
 
-  private addDaysOfOperation(value){
+  private addDaysOfOperation(value) {
     const instance = this._formService.createClientOperationForm();
     instance.patchValue(value);
     (<FormArray>this.clientAddForm.get('daysOfOperation')).push(instance);

@@ -8,14 +8,15 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddClientComponent } from './client-details/add-client/add-client.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchClientComponent,
     LoginComponent,
-    AddClientComponent
+    AddClientComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
