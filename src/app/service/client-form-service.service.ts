@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import {Client} from "../model/Client";
+import { Validators } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,10 @@ export class ClientFormServiceService {
   createClientForm() {
     return this._fb.group({
       clientId : '',
-      clientName : '',
+      clientName : ['', Validators.required],
       ownerFirstName : '',
       ownerLastName : '',
-      clientCategory : '',
+      clientCategory : ['', Validators.required],
       status : '',
       prebookingHours : '',
       houseNo : '',

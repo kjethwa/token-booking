@@ -32,6 +32,14 @@
     margin-top : 5rem;
 }
 
+.header-color
+{
+    text-align: center;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 24px;
+}
+
 /*.table
 {
 display: block;

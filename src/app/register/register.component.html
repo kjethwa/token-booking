@@ -1,0 +1,70 @@
+﻿<div class="row mb-md">
+    <div class="col-sm-12">
+        <div class="header-color">Sign up Q-Assist</div>
+    </div>
+</div>
+<!--<h3 class="header-color">Sign up Q-Assist<h3>-->
+<form [formGroup]="registerForm">
+    <div class="form-group" *ngIf="pageCount === 1">
+        <!--<label for="firstName">First Name</label>-->
+        <input type="text" formControlName="firstName" placeholder="Enter First Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+    </div>
+    <div class="form-group" *ngIf=" pageCount === 1">
+        <!--<label for="lastName">Last Name</label>-->
+        <input type="text" formControlName="lastName" placeholder="Enter Last Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="pageCount === 2">
+        <!--<label for="username">Username</label>-->
+        <input type="text" formControlName="username" class="form-control" placeholder="Enter User Name" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="pageCount === 2">
+        <!--<label for="password">Password</label>-->
+        <input type="password" formControlName="password" class="form-control" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 3 characters</div>
+        </div>
+    </div>
+    <div class="form-group" *ngIf="pageCount === 2">
+      <!--<label for="confirmPassword">Confirm Password</label>-->
+      <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Re-enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+          <div *ngIf="f.confirmPassword.errors.minlength">Confirm Password must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="pageCount === 3">
+        <label for="mobileNo">Mobile Number</label>
+        <input type="text" formControlName="mobileNo" class="form-control" maxlength="10"
+        placeholder="Enter Mobile Number" [ngClass]="{ 'is-invalid': f.mobileNo.errors }" 
+        (change)="onChangeMobileNo()"/>
+        <div class="invalid-feedback">
+            <!--<div *ngIf="f.mobileNo.errors.required">Mobile Number is required</div>-->
+            <div *ngIf="registerForm.get('mobileNo').value.length > 0 && !showOTP">Mobile Number must be 10 digits</div>
+        </div>
+    </div>
+
+    <div class="form-group" *ngIf="pageCount === 3 && showOTP">
+        <!--<label for="mobileNo">OTP</label>-->
+        <input type="number" formControlName="mobileOtp" class="form-control" placeholder="Enter OTP" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+            <div *ngIf="f.mobileNo.errors.required">Mobile Number is required</div>
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button *ngIf="pageCount > 1" class="btn btn-link left" (click)="onPreviousClick()"><i class="fa fa-chevron-circle-left fa-2x"></i></button>
+        <button *ngIf="pageCount < 3" class="btn btn-link right" (click)="onNextClick()"><i class="fa fa-chevron-circle-right fa-2x"></i></button>
+        <button [disabled]="loading" title="Submit" *ngIf="pageCount === 3" class="btn btn-link right" (click)="onSubmit()" ><i class="fa fa-thumbs-o-up fa-2x"></i></button>
+    </div>
+</form>

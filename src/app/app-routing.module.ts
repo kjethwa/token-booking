@@ -7,9 +7,11 @@ import { SearchClientComponent } from './client-details/search-client/search-cli
 import { AppComponent } from './app.component';
 import { LoginComponent } from "src/app/login/login.component";
 import { AddClientComponent } from "src/app/client-details/add-client/add-client.component";
+import { RegisterComponent } from "src/app/register";
 
 const routes: Routes = [
  { path: 'login', component: LoginComponent },
+ { path: 'register', component: RegisterComponent },
  { path: 'search', component: SearchClientComponent },
  { path: 'add', component: AddClientComponent },
  { path: 'edit/:id', component: AddClientComponent },
