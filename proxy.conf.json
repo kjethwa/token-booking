@@ -6,6 +6,7 @@
     "logLevel": "debug",
     "pathRewrite": {
       "^/server" : ""
-    }
+    },
+    "changeOrigin": true
   }
 }
