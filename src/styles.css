@@ -46,3 +46,19 @@ display: block;
   height: 40%;
   overflow-y: scroll;
 }*/
+
+.form-control {
+    border: 0;
+    border-bottom: 1px solid black;
+    box-shadow: 0 0 0;
+    color: #505254;
+    font-weight: 400;
+    padding: 0 12px 2px 0;   
+    background-color: transparent;
+}
+
+.form-control:focus {
+  /*border-color: inherit;*/
+  /*-webkit-box-shadow: none;*/
+  box-shadow: none;
+}

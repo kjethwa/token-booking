@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddClientComponent } from './client-details/add-client/add-client.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
+import { ValidationDirective } from './directive/validation.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RegisterComponent } from './register/register.component';
     SearchClientComponent,
     LoginComponent,
     AddClientComponent,
-    RegisterComponent
+    RegisterComponent,
+    ValidationDirective
   ],
   imports: [
     BrowserModule,
