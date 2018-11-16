@@ -1,0 +1,6 @@
+<div>
+  <select class="form-control" >
+    <option value="">Select</option>
+    <option *ngFor="let value of allActiveClientName" value="{{ value.clientId }}">{{ value.clientName }}</option>
+  </select>
+</div>

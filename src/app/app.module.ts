@@ -10,6 +10,7 @@ import { AddClientComponent } from './client-details/add-client/add-client.compo
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { ValidationDirective } from './directive/validation.directive';
+import { ClientsessionComponent } from './user-screen/clientsession/clientsession.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ValidationDirective } from './directive/validation.directive';
     LoginComponent,
     AddClientComponent,
     RegisterComponent,
-    ValidationDirective
+    ValidationDirective,
+    ClientsessionComponent
   ],
   imports: [
     BrowserModule,

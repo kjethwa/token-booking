@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {AppConstant} from "../app-constant";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientServiceService {
-  clientURL = 'http://localhost:8080';
+  serverURL = AppConstant.serverURL;
 
   constructor(private _http : HttpClient) { }
 
   getClients() {
-    return this._http.get(this.clientURL + '/clients');
+    return this._http.get(this.serverURL + '/clients');
   }
 
   getClientById(id) {
-    return this._http.get(this.clientURL + '/clients/' + id);
+    return this._http.get(this.serverURL + '/clients/' + id);
   }
 
   addClients(data) {
-    return this._http.post(this.clientURL  + '/clients', data);
+    return this._http.post(this.serverURL  + '/clients', data);
   }
 
   updateClient(data) {
-    return this._http.put(this.clientURL  + '/clients', data);
+    return this._http.put(this.serverURL  + '/clients', data);
   }
 
   getSearchResults(parameter) {
-    return this._http.get(this.clientURL + '/searchClients?search=' + parameter);
+    return this._http.get(this.serverURL + '/searchClients?search=' + parameter);
   }
 }

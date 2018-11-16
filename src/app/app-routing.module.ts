@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from "src/app/login/login.component";
 import { AddClientComponent } from "src/app/client-details/add-client/add-client.component";
 import { RegisterComponent } from "src/app/register";
+import {ClientsessionComponent} from "./user-screen/clientsession/clientsession.component";
 
 const routes: Routes = [
  { path: 'login', component: LoginComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
  { path: 'search', component: SearchClientComponent },
  { path: 'add', component: AddClientComponent },
  { path: 'edit/:id', component: AddClientComponent },
- { path: 'view/:id', component: AddClientComponent }
+ { path: 'view/:id', component: AddClientComponent },
+ { path: 'user', component: ClientsessionComponent }
 ];
 
 @NgModule({

@@ -55,17 +55,17 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        // this.userService.register(this.registerForm.value)
-        //     .pipe(first())
-        //     .subscribe(
-        //         data => {
-        //             this.alertService.success('Registration successful', true);
-        //             this.router.navigate(['/login']);
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
+        this.userService.registerUser(this.registerForm.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
     }
 
     onNextClick() {
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
     isDisabled() {
         const formControl = this.registerForm;
         if (this.pageCount === 1) {
-            return !(formControl.get('firstName').valid && formControl.get('lastName').valid && 
+            return !(formControl.get('firstName').valid && formControl.get('lastName').valid &&
                     this.validInputs['firstName'] && this.validInputs['lastName']) ;
         } else if (this.pageCount === 2) {
             return !(formControl.get('username').valid && formControl.get('password').valid && formControl.get('confirmPassword').valid &&
@@ -93,13 +93,13 @@ export class RegisterComponent implements OnInit {
             (event.target.value.length < length) ? this.validInputs[name] = false : this.validInputs[name] = true;
         } else if (name === 'confirmPassword') {
             (this.registerForm.get('password').value !== event.target.value) ? this.validInputs[name] = false : this.validInputs[name] = true;
-        } 
+        }
     }
 
     isSubmitDisabled() {
         return !(this.registerForm.get('mobileNo').valid && this.validInputs['mobileNo']);
     }
 
-    
+
 
 }
