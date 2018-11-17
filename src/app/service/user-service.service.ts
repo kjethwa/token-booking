@@ -11,7 +11,12 @@ export class UserServiceService {
   constructor(private _http : HttpClient) { }
 
   getAllActiveClientNames() {
-    return this._http.get(this.serverURL + '/clientname/');
+    return this._http.get(this.serverURL + '/clientname');
+  }
+
+  getAllSessionsByClientId(clientId) {
+    const url = this.serverURL + '/clients/' + clientId + '/sessions';
+    return this._http.get(url);
   }
 
 }
