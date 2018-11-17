@@ -1,14 +1,19 @@
 <div [formGroup]="clientSessionForm">
-
   <div class="row">
     <div class="col-sm-3 col-md-4 col-xs-6">
-      <select class="form-control form-control-underline" formControlName="clientId" (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
-        <option value="" >Select</option>
+      <select class="form-control form-control-underline" formControlName="clientId"
+              (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
+        <option value="">Select</option>
         <option *ngFor="let value of allActiveClientName" [value]="value.clientId">{{ value.clientName }}</option>
       </select>
     </div>
   </div>
-
-
-  <app-current-session [currentSession]="currentSession"></app-current-session>
 </div>
+
+
+  <button class="form-control" value="previous" [disabled]="sessionIndex==0" (click)="previousSession()">Previous
+  </button>
+  <app-current-session [currentSession]="currentSession"></app-current-session>
+  <button class="form-control" value="next" (click)="nextSession()" [disabled]="sessionIndex == maxSession">next
+  </button>
+

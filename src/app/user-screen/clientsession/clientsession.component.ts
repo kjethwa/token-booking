@@ -18,9 +18,12 @@ export class ClientsessionComponent implements OnInit {
   currentSession = new Session();
   allActiveClientName: any;
   clientSessionForm: FormGroup;
+  sessionIndex: number;
+  maxSession:number;
   constructor(private _userService: UserServiceService,
               private _fb: FormBuilder){
-
+    this.sessionIndex = 0;
+    this.maxSession = 0;
   }
 
   ngOnInit() {
@@ -42,22 +45,40 @@ export class ClientsessionComponent implements OnInit {
       this._userService.getAllSessionsByClientId(clientId).subscribe((sessionResponse) => {
         console.log(this.clientSessionDetails);
         this.clientSessionDetails = sessionResponse;
-        this.currentSession = this.createSession(this.clientSessionDetails.sessions[0]);
-        this.clientSessionDetails.sessions.forEach(element => {
-        // let currentDow = this.getCurrentDayOfWeek(element.date);
-        // element['daysOfWeek'] = currentDow;
-        });
-        
-        
+        this.clientSessionDetails.sessions.sort((s1, s2) => this.compareSessionDate(s1, s2));
+        if (this.clientSessionDetails.sessions.length > 0) {
+          this.currentSession = this.createSession(this.clientSessionDetails.sessions[0]);
+          this.maxSession = this.clientSessionDetails.sessions.length-1;
+        }
       });
+    }
+  }
+
+  nextSession(){
+    this.sessionIndex++;
+    if(this.sessionIndex <= this.maxSession){
+      this.currentSession = this.createSession(this.clientSessionDetails.sessions[this.sessionIndex]);
+    }
+    else{
+      --this.sessionIndex;
+    }
+  }
+
+  previousSession(){
+    this.sessionIndex--;
+    if (this.sessionIndex >= 0) {
+      this.currentSession = this.createSession(this.clientSessionDetails.sessions[this.sessionIndex]);
+    }
+    else {
+      this.sessionIndex++;
     }
   }
 
   createSession(session: any): Session{
     let currentSession = {
       date : session.date,
-      fromTime: session.fromTime,
-      toTime: session.toTime,
+      fromTime: this.getTimeInFormat(session.fromTime),
+      toTime: this.getTimeInFormat(session.toTime),
       day : this.getCurrentDayOfWeek(session.date),
       availableToken: session.availableToken,
       clientName: this.clientSessionDetails.clientIdNameAddress.clientName,
@@ -70,6 +91,36 @@ export class ClientsessionComponent implements OnInit {
     return moment(date, 'dd-MM-yyyy').format('dddd');
   }
 
+  getTimeInFormat(time){
+    return moment(time, ["HH:mm"]).format("h:mm A");
+  }
+
+  compareSessionDate(s1, s2) {
+    console.log('s1---->' + s1.date);
+    let date1 = moment(s1.date, 'dd-MM-yyyy');
+    let date2 = moment(s2.date, 'dd-MM-yyyy');
+    console.log(date1 + '---' + date2);
+    if (date1.isSame(date2)) {
+      let time1 = moment(s1.fromTime, 'HH:mm');
+      let time2 = moment(s2.fromTime, 'HH:mm');
+      if (time1.isBefore(time2)) {
+        return 1;
+      }
+      else if (time1.isAfter(time2)) {
+        return -1;
+      }
+      else {
+        0;
+      }
+    }
+    else if (date1.isBefore(date2)) {
+      return 1;
+    }
+    else {
+      return -1;
+    }
+  }
+
   createAddress() {
     const object = _.cloneDeep(this.clientSessionDetails.clientIdNameAddress);
     delete object['clientId'];
@@ -80,15 +131,9 @@ export class ClientsessionComponent implements OnInit {
       if (val) {
         address =  address + val + ',';
       }
-      
+
     });
     return address.substring(0,address.length-1);
   }
-
-  // getClientNameFromId(clientId) {
-  //   _.find(this.allActiveClientName, (o) => {
-  //     o.clientId === clientId;
-  //   })
-  // }
 
 }
