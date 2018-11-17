@@ -11,6 +11,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { ValidationDirective } from './directive/validation.directive';
 import { ClientsessionComponent } from './user-screen/clientsession/clientsession.component';
+import { IndexComponent } from './index/index.component';
+import { CurrentSessionComponent } from './user-screen/clientsession/partials/current-session/current-session.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ClientsessionComponent } from './user-screen/clientsession/clientsessio
     AddClientComponent,
     RegisterComponent,
     ValidationDirective,
-    ClientsessionComponent
+    ClientsessionComponent,
+    IndexComponent,
+    CurrentSessionComponent
   ],
   imports: [
     BrowserModule,

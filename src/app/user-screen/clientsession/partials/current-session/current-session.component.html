@@ -1,0 +1,11 @@
+<ng-container *ngIf="currentSession">
+  <div class="row mt-md">
+    <div class="col-sm-1 col-md-1 col-xs-1">
+      <div class="input-group">
+        {{currentSession | json}}
+        <div class="form-control">{{currentSession?.date}}</div>
+        <div class="form-control">{{currentSession?.fromTime}}</div>
+      </div>
+    </div>
+  </div>
+</ng-container>
