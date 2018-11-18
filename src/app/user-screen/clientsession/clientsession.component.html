@@ -1,8 +1,7 @@
 <div [formGroup]="clientSessionForm">
   <div class="row">
     <div class="col-sm-3 col-md-4 col-xs-6">
-      <select class="form-control form-control-underline" formControlName="clientId"
-              (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
+      <select class="form-control form-control-underline" formControlName="clientId" (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
         <option value="">Select</option>
         <option *ngFor="let value of allActiveClientName" [value]="value.clientId">{{ value.clientName }}</option>
       </select>
@@ -10,10 +9,12 @@
   </div>
 </div>
 
-
-  <button class="form-control" value="previous" [disabled]="sessionIndex==0" (click)="previousSession()">Previous
-  </button>
-  <app-current-session [currentSession]="currentSession"></app-current-session>
-  <button class="form-control" value="next" (click)="nextSession()" [disabled]="sessionIndex == maxSession">next
-  </button>
-
+<app-current-session [currentSession]="currentSession"></app-current-session>
+<div class="row mt-md">
+  <div class="col-sm-4 col-md-3 col-xs-6 text-center">
+    <button *ngIf="currentSession.date" class="btn btn-link" [disabled]="sessionIndex==0" (click)="previousSession()"><i class="fa fa-chevron-circle-left fa-2x"></i>
+    </button> 
+    <button *ngIf="currentSession.date" class="btn btn-link" (click)="nextSession()" [disabled]="sessionIndex == maxSession"><i class="fa fa-chevron-circle-right fa-2x"></i>
+    </button>
+  </div>
+</div>

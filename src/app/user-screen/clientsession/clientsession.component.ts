@@ -88,7 +88,8 @@ export class ClientsessionComponent implements OnInit {
   }
 
   getCurrentDayOfWeek(date) {
-    return moment(date, 'dd-MM-yyyy').format('dddd');
+    debugger;
+    return moment(date, 'DD-MM-YYYY').format('dddd');
   }
 
   getTimeInFormat(time){
