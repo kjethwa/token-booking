@@ -12,9 +12,9 @@
 <app-current-session [currentSession]="currentSession"></app-current-session>
 <div class="row mt-md">
   <div class="col-sm-4 col-md-3 col-xs-6 text-center">
-    <button *ngIf="currentSession.date" class="btn btn-link" [disabled]="sessionIndex==0" (click)="previousSession()"><i class="fa fa-chevron-circle-left fa-2x"></i>
-    </button> 
-    <button *ngIf="currentSession.date" class="btn btn-link" (click)="nextSession()" [disabled]="sessionIndex == maxSession"><i class="fa fa-chevron-circle-right fa-2x"></i>
+    <button *ngIf="currentSession?.date" class="btn btn-link" [disabled]="sessionIndex==0" (click)="previousSession()"><i class="fa fa-chevron-circle-left fa-2x"></i>
+    </button>
+    <button *ngIf="currentSession?.date" class="btn btn-link" (click)="nextSession()" [disabled]="sessionIndex == maxSession"><i class="fa fa-chevron-circle-right fa-2x"></i>
     </button>
   </div>
 </div>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../service/user.service";
 import {UserServiceService} from "../../service/user-service.service";
-import {parseHttpResponse} from "selenium-webdriver/http";
 import { FormGroup } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 import * as moment from 'moment';
@@ -15,7 +13,7 @@ import * as _ from 'lodash';
 })
 export class ClientsessionComponent implements OnInit {
   clientSessionDetails: any;
-  currentSession = new Session();
+  currentSession: any;
   allActiveClientName: any;
   clientSessionForm: FormGroup;
   sessionIndex: number;
@@ -52,6 +50,16 @@ export class ClientsessionComponent implements OnInit {
         }
       });
     }
+    else{
+      this.reset();
+    }
+  }
+
+  reset() {
+    this.clientSessionDetails = '';
+    this.currentSession = undefined;
+    this.maxSession = 0;
+    this.sessionIndex = 0;
   }
 
   nextSession(){
@@ -74,6 +82,10 @@ export class ClientsessionComponent implements OnInit {
     }
   }
 
+  bookToken(){
+
+  }
+
   createSession(session: any): Session{
     let currentSession = {
       date : session.date,
@@ -88,7 +100,6 @@ export class ClientsessionComponent implements OnInit {
   }
 
   getCurrentDayOfWeek(date) {
-    debugger;
     return moment(date, 'DD-MM-YYYY').format('dddd');
   }
 
@@ -97,28 +108,26 @@ export class ClientsessionComponent implements OnInit {
   }
 
   compareSessionDate(s1, s2) {
-    console.log('s1---->' + s1.date);
-    let date1 = moment(s1.date, 'dd-MM-yyyy');
-    let date2 = moment(s2.date, 'dd-MM-yyyy');
-    console.log(date1 + '---' + date2);
+    let date1 = moment(s1.date, 'DD-MM-YYYY');
+    let date2 = moment(s2.date, 'DD-MM-YYYY');
     if (date1.isSame(date2)) {
       let time1 = moment(s1.fromTime, 'HH:mm');
       let time2 = moment(s2.fromTime, 'HH:mm');
       if (time1.isBefore(time2)) {
-        return 1;
+        return -1;
       }
       else if (time1.isAfter(time2)) {
-        return -1;
+        return 1;
       }
       else {
         0;
       }
     }
     else if (date1.isBefore(date2)) {
-      return 1;
+      return -1;
     }
     else {
-      return -1;
+      return 1;
     }
   }
 
