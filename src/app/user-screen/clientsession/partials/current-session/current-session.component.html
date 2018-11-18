@@ -1,12 +1,30 @@
-<ng-container *ngIf="currentSession">
+<ng-container *ngIf="currentSession?.date">
   <div class="row mt-md">
-    <div class="col-sm-1 col-md-1 col-xs-1">
-      <div class="input-group">
-        <div class="form-control">{{currentSession?.date}}</div>
+    <div class="col-sm-4 col-md-3 col-xs-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="form-control input-group-text"><i class="fa fa-calendar"></i></div>
+        </div>
+        <div class="form-control">{{currentSession?.date}} {{currentSession?.day}}</div>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-3 col-xs-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="form-control input-group-text"><i class="fa fa-clock-o"></i></div>
+        </div>
         <div class="form-control">{{currentSession?.fromTime}}</div>
         <div class="form-control">{{currentSession?.toTime}}</div>
-        <div class="form-control">{{currentSession?.address}}</div>
-        <div class="form-control">{{currentSession?.day}}</div>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-3 col-xs-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="form-control input-group-text address-height"><i class="fa fa-address-card-o"></i></div>
+        </div>
+        <div class="form-control address-height">{{currentSession?.address}}</div>
       </div>
     </div>
   </div>
