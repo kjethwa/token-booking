@@ -40,8 +40,7 @@ export class ClientsessionComponent implements OnInit {
 
   onClientNameChange(clientId) {
     if (clientId) {
-      this._userService.getAllSessionsByClientId(clientId).subscribe((sessionResponse) => {
-        console.log(this.clientSessionDetails);
+      this._userService.getAllSessionsByClientId(clientId,1).subscribe((sessionResponse) => {
         this.clientSessionDetails = sessionResponse;
         this.clientSessionDetails.sessions.sort((s1, s2) => this.compareSessionDate(s1, s2));
         if (this.clientSessionDetails.sessions.length > 0) {

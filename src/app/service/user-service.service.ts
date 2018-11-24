@@ -14,8 +14,8 @@ export class UserServiceService {
     return this._http.get(this.serverURL + '/clientname');
   }
 
-  getAllSessionsByClientId(clientId) {
-    const url = this.serverURL + '/clients/' + clientId + '/sessions';
+  getAllSessionsByClientId(clientId,userId) {
+    const url = this.serverURL + '/clients/' + clientId + '/sessions' + '?userId=' + userId;
     return this._http.get(url);
   }
 
