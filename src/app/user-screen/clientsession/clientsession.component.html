@@ -1,19 +1,35 @@
-<div [formGroup]="clientSessionForm">
-  <div class="row">
-    <div class="col-sm-3 col-md-4 col-xs-6">
-      <select class="form-control form-control-underline" formControlName="clientId"
-              (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
-        <option value="">Select</option>
-        <option *ngFor="let value of allActiveClientName" [value]="value.clientId">{{ value.clientName }}</option>
-      </select>
+<ng-container *ngIf="!bookClicked">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Book Token</h4>
+            </div>
+            <div class="content">
+                <div [formGroup]="clientSessionForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control border-input" formControlName="clientId" (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
+                                <option value="">Select</option>
+                                <option *ngFor="let value of allActiveClientName" [value]="value.clientId">{{ value.clientName }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <app-current-session [currentSession]="currentSession"></app-current-session>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <button *ngIf="currentSession?.date" class="btn btn-link btn-fill" [disabled]="sessionIndex==0" (click)="previousSession()"><i class="fa fa-chevron-circle-left fa-2x"></i></button>
+                        <button *ngIf="currentSession?.date" class="btn btn-link btn-fill" (click)="nextSession()" [disabled]="sessionIndex == maxSession"><i class="fa fa-chevron-circle-right fa-2x"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-
-  <button class="form-control" value="previous" [disabled]="sessionIndex==0" (click)="previousSession()">Previous
-  </button>
-  <app-current-session [currentSession]="currentSession"></app-current-session>
-  <button class="form-control" value="next" (click)="nextSession()" [disabled]="sessionIndex == maxSession">next
-  </button>
-
+    <div class="card" *ngIf="currentSession.date">
+        <div class="content text-center">
+            <button class="btn btn-info btn-fill btn-wd" (click)="onBookClick()"><i class="ti-check"></i></button>
+        </div>
+    </div>
+</ng-container>
