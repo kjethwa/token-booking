@@ -6,4 +6,5 @@ export class Session{
     toTime: String;
     availableToken: String;
     clientName: String;
+    sessionId: String;
 }

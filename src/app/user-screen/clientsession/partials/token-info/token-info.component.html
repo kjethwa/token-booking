@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="header text-center">
+            <h5 class="title">{{currentSession?.clientName}}</h5>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="icon-big icon-warning text-center">
+                        <i class="ti-alarm-clock"></i>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="numbers">
+                        <p style="font-size: 80px;">{{nextAvailableToken}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <hr />
+                <div class="stats">
+                    Current Token Number
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="content text-center">
+            <button class="btn btn-info btn-fill btn-wd" (click)="onConfirmClick()">Confirm</button>
+        </div>
+    </div>
+</div>

@@ -3,8 +3,9 @@ import {UserServiceService} from "../../service/user-service.service";
 import { FormGroup } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 import * as moment from 'moment';
-import { Session } from "src/app/model/Session";
+import { Session } from "app/model/Session";
 import * as _ from 'lodash';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-clientsession',
@@ -19,7 +20,8 @@ export class ClientsessionComponent implements OnInit {
   sessionIndex: number;
   maxSession:number;
   constructor(private _userService: UserServiceService,
-              private _fb: FormBuilder){
+              private _fb: FormBuilder,
+              private _router: Router){
     this.sessionIndex = 0;
     this.maxSession = 0;
   }
@@ -93,7 +95,8 @@ export class ClientsessionComponent implements OnInit {
       day : this.getCurrentDayOfWeek(session.date),
       availableToken: session.availableToken,
       clientName: this.clientSessionDetails.clientIdNameAddress.clientName,
-      address: this.createAddress()
+      address: this.createAddress(),
+      sessionId: session.sessionId
     }
     return currentSession;
   }
@@ -143,6 +146,10 @@ export class ClientsessionComponent implements OnInit {
 
     });
     return address.substring(0,address.length-1);
+  }
+
+  onBookClick() {
+    this._router.navigate(['/book'], {queryParams : {clientName : this.currentSession.clientName, sessionId : this.currentSession.sessionId}});
   }
 
 }

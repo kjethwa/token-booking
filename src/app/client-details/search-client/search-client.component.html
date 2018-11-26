@@ -1,89 +1,111 @@
-
-
-<h6>Search</h6>
-<form [formGroup]="searchForm">
-  <div class="row">
-    <div class="col-md-3 col-sm-4 mb-md">
-      <label>Client Name</label>
-      <input type="text" class="form-control" formControlName="clientName">
+<div class="container-fluid">
+  <div class="card">
+    <div class="header">
+      <h4 class="title">Search</h4>
     </div>
 
-    <div class="col-md-3 col-sm-4">
-      <label>Owner Name</label>
-      <input type="text" class="form-control" formControlName="ownerName">
-    </div>
+    <div class="content">
+      <form [formGroup]="searchForm">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Client Name</label>
+              <input type="text" class="form-control border-input" formControlName="clientName">
+            </div>
+          </div>
 
-    <div class="col-md-3 col-sm-4">
-      <label>Category</label>
-      <select class="form-control" formControlName="clientCategory">
-        <option *ngFor="let value of clientCategory" value="{{ value }}">{{ value }}</option>
-      </select>
-    </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Owner Name</label>
+              <input type="text" class="form-control border-input" formControlName="ownerName">
+            </div>
+          </div>
 
-    <div class="col-md-3 col-sm-4">
-      <label>State</label>
-      <select class="form-control" formControlName="state">
-        <option value="">Select</option>
-        <option value="Maharashtra">Maharashtra</option>
-        <option value="Goa">Goa</option>
-      </select>
-    </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Category</label>
+              <select class="form-control border-input" formControlName="clientCategory">
+                <option *ngFor="let value of clientCategory" value="{{ value }}">{{ value }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>State</label>
+              <select class="form-control border-input" formControlName="state">
+            <option value="">Select</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Goa">Goa</option>
+          </select>
+            </div>
+          </div>
 
-    <div class="col-md-3 col-sm-4">
-      <label>City</label>
-      <select class="form-control" formControlName="city">
-        <option value="">Select</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Panaji">Panaji</option>
-      </select>
-    </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>City</label>
+              <select class="form-control border-input" formControlName="city">
+            <option value="">Select</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Panaji">Panaji</option>
+          </select>
+            </div>
+          </div>
 
-    <div class="col-md-3 col-sm-4">
-      <label>Status</label>
-      <select class="form-control" formControlName="status">
-        <option value="">Select</option>
-        <option value="Active">Active</option>
-        <option value="Inactive">Inactive</option>
-      </select>
-    </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-control border-input" formControlName="status">
+            <option value="">Select</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 d-flex align-items-end">
+            <button class="btn btn-simple btn-info btn-fill btn-wd" (click)="onSearchClick(searchForm)"><i class="fa fa-search"></i></button>
+            <button class="btn btn-info btn-fill btn-wd" (click)="onResetClick()"><i class="fa fa-refresh"></i></button>
+          </div>
+        </div>
+      </form>
+      <div class="content table-responsive table-full-width">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Client Name</th>
+              <th>Owner Name</th>
+              <th>Category</th>
+              <th>State</th>
+              <th>City</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let records of clientRecords;let i = index">
+              <td><button class="btn btn-link" (click)="onEditClick(records)">{{records?.clientName }}</button></td>
+              <td>{{records?.ownerFirstName}} {{records?.ownerLastName}}</td>
+              <td>{{records?.clientCategory}}</td>
+              <td>{{records?.state}}</td>
+              <td>{{records?.city}}</td>
+              <td>{{records?.state}}</td>
+            </tr>
 
-    <div class="col-md-3 col-sm-4 d-flex align-items-end">
-      <button class="btn btn-primary mr-sm" (click)="onSearchClick(searchForm)"><i class="fa fa-search"></i></button>
-      <button class="btn btn-primary" (click)="onResetClick()"><i class="fa fa-refresh"></i></button>
+            <tr *ngIf="!clientRecords.length">
+              <td colspan="6" class="text-center"><b>No Data to Show</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</form>
-
-<div class="mt-md mb-md">
-  <h6>Search Grid</h6>
 </div>
-<table class="table table-striped table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th>Client Name</th>
-      <th>Owner Name</th>
-      <th>Category</th>
-      <th>State</th>
-      <th>City</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let records of clientRecords;let i = index">
-      <td><button class="btn btn-link" (click)="onEditClick(records)">{{records?.clientName }}</button></td>
-      <td>{{records?.ownerFirstName}} {{records?.ownerLastName}}</td>
-      <td>{{records?.clientCategory}}</td>
-      <td>{{records?.state}}</td>
-      <td>{{records?.city}}</td>
-      <td>{{records?.state}}</td>
-    </tr>
-  </tbody>
-</table>
 
 <div class="row mt-lg">
   <div class="col-sm-12 text-center">
-    <button class="btn btn-primary mr-sm" routerLink="/add"><i class="fa fa-plus">Add Client</i></button>
+    <button class="btn btn-info btn-fill btn-wd" routerLink="/add"><i class="ti-plus">Add Client</i></button>
     <!--<button class="btn btn-secondary">Cancel</button>-->
   </div>
 </div>
-
