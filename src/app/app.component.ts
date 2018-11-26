@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+
+declare var $:any;
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,4 @@ import { Router } from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
-  constructor(private router: Router) {}
-  title = 'token-booking';
-}
-
+export class AppComponent{}

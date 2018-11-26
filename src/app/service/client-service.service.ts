@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AppConstant} from "../app-constant";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientServiceService {
   serverURL = AppConstant.serverURL;
 

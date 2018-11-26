@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../service/user.service";
 import {UserServiceService} from "../../service/user-service.service";
-import {parseHttpResponse} from "selenium-webdriver/http";
 import { FormGroup } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 import * as moment from 'moment';
-import { Session } from "src/app/model/Session";
+import { Session } from "app/model/Session";
 import * as _ from 'lodash';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-clientsession',
@@ -15,13 +14,14 @@ import * as _ from 'lodash';
 })
 export class ClientsessionComponent implements OnInit {
   clientSessionDetails: any;
-  currentSession = new Session();
+  currentSession: any;
   allActiveClientName: any;
   clientSessionForm: FormGroup;
   sessionIndex: number;
   maxSession:number;
   constructor(private _userService: UserServiceService,
-              private _fb: FormBuilder){
+              private _fb: FormBuilder,
+              private _router: Router){
     this.sessionIndex = 0;
     this.maxSession = 0;
   }
@@ -42,8 +42,7 @@ export class ClientsessionComponent implements OnInit {
 
   onClientNameChange(clientId) {
     if (clientId) {
-      this._userService.getAllSessionsByClientId(clientId).subscribe((sessionResponse) => {
-        console.log(this.clientSessionDetails);
+      this._userService.getAllSessionsByClientId(clientId,1).subscribe((sessionResponse) => {
         this.clientSessionDetails = sessionResponse;
         this.clientSessionDetails.sessions.sort((s1, s2) => this.compareSessionDate(s1, s2));
         if (this.clientSessionDetails.sessions.length > 0) {
@@ -52,6 +51,16 @@ export class ClientsessionComponent implements OnInit {
         }
       });
     }
+    else{
+      this.reset();
+    }
+  }
+
+  reset() {
+    this.clientSessionDetails = '';
+    this.currentSession = undefined;
+    this.maxSession = 0;
+    this.sessionIndex = 0;
   }
 
   nextSession(){
@@ -74,6 +83,10 @@ export class ClientsessionComponent implements OnInit {
     }
   }
 
+  bookToken(){
+
+  }
+
   createSession(session: any): Session{
     let currentSession = {
       date : session.date,
@@ -82,13 +95,14 @@ export class ClientsessionComponent implements OnInit {
       day : this.getCurrentDayOfWeek(session.date),
       availableToken: session.availableToken,
       clientName: this.clientSessionDetails.clientIdNameAddress.clientName,
-      address: this.createAddress()
+      address: this.createAddress(),
+      sessionId: session.sessionId
     }
     return currentSession;
   }
 
   getCurrentDayOfWeek(date) {
-    return moment(date, 'dd-MM-yyyy').format('dddd');
+    return moment(date, 'DD-MM-YYYY').format('dddd');
   }
 
   getTimeInFormat(time){
@@ -96,28 +110,26 @@ export class ClientsessionComponent implements OnInit {
   }
 
   compareSessionDate(s1, s2) {
-    console.log('s1---->' + s1.date);
-    let date1 = moment(s1.date, 'dd-MM-yyyy');
-    let date2 = moment(s2.date, 'dd-MM-yyyy');
-    console.log(date1 + '---' + date2);
+    let date1 = moment(s1.date, 'DD-MM-YYYY');
+    let date2 = moment(s2.date, 'DD-MM-YYYY');
     if (date1.isSame(date2)) {
       let time1 = moment(s1.fromTime, 'HH:mm');
       let time2 = moment(s2.fromTime, 'HH:mm');
       if (time1.isBefore(time2)) {
-        return 1;
+        return -1;
       }
       else if (time1.isAfter(time2)) {
-        return -1;
+        return 1;
       }
       else {
         0;
       }
     }
     else if (date1.isBefore(date2)) {
-      return 1;
+      return -1;
     }
     else {
-      return -1;
+      return 1;
     }
   }
 
@@ -134,6 +146,10 @@ export class ClientsessionComponent implements OnInit {
 
     });
     return address.substring(0,address.length-1);
+  }
+
+  onBookClick() {
+    this._router.navigate(['/book'], {queryParams : {clientName : this.currentSession.clientName, sessionId : this.currentSession.sessionId}});
   }
 
 }

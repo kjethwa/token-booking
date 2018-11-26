@@ -1,10 +1,12 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { UserService } from "src/app/service/user.service";
-import { AlertService } from "src/app/service/alert.service";
+// import { first } from 'rxjs/operators';
+// import { UserService } from "src/app/service/user.service";
+// import { AlertService } from "src/app/service/alert.service";
 import { AppConstant } from '../app-constant';
+import { UserService } from "app/service/user.service";
+import { AlertService } from "app/service/alert.service";
 
 // import { AlertService, UserService } from '../../_services';
 
@@ -46,27 +48,27 @@ export class RegisterComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
 
-    onSubmit() {
-        this.submitted = true;
-        console.log(this.registerForm.value);
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
+    // onSubmit() {
+    //     this.submitted = true;
+    //     console.log(this.registerForm.value);
+    //     // stop here if form is invalid
+    //     if (this.registerForm.invalid) {
+    //         return;
+    //     }
 
-        this.loading = true;
-        this.userService.registerUser(this.registerForm.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
-    }
+    //     this.loading = true;
+    //     this.userService.registerUser(this.registerForm.value)
+    //         .pipe(first())
+    //         .subscribe(
+    //             data => {
+    //                 this.alertService.success('Registration successful', true);
+    //                 this.router.navigate(['/login']);
+    //             },
+    //             error => {
+    //                 this.alertService.error(error);
+    //                 this.loading = false;
+    //             });
+    // }
 
     onNextClick() {
         this.pageCount += 1;
