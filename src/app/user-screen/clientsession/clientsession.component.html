@@ -26,9 +26,10 @@
             </div>
         </div>
 
-        <div class="card" *ngIf="currentSession.date">
+        <div class="card" *ngIf="currentSession?.date">
             <div class="content text-center">
                 <button class="btn btn-info btn-fill btn-wd" (click)="onBookClick()"><i class="ti-check"></i></button>
             </div>
         </div>
+    </div>
 </ng-container>
