@@ -35,6 +35,8 @@ import { PropertySericeService } from "app/service/property-serice.service";
 import { UserServiceService } from "app/service/user-service.service";
 import { UserService } from "app/service/user.service";
 import { TokenInfoComponent } from "app/user-screen/clientsession/partials/token-info/token-info.component";
+import { NgNotifyPopup } from 'ng2-notify-popup';
+import { NotificationService } from "ng2-notify-popup";
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { TokenInfoComponent } from "app/user-screen/clientsession/partials/token
     NavbarModule,
     FooterModule,
     FixedPluginModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'}),
+    NgNotifyPopup
 
   ],
   providers: [
@@ -76,7 +79,8 @@ import { TokenInfoComponent } from "app/user-screen/clientsession/partials/token
     ClientServiceService,
     PropertySericeService,
     UserServiceService,
-    UserService
+    UserService,
+    NotificationService
     ],
   bootstrap: [AppComponent]
 })

@@ -31,6 +31,7 @@
     "express": "4.15.3",
     "jquery": "1.12.4",
     "moment": "2.18.1",
+    "ng2-notify-popup": "^0.1.25",
     "ngx-toastr": "^9.1.1",
     "rxjs": "5.4.2",
     "zone.js": "0.8.4"
