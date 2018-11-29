@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { Session } from "app/model/Session";
 import * as _ from 'lodash';
 import { Router } from "@angular/router";
-import { NotificationService } from "ng2-notify-popup";
 
 @Component({
   selector: 'app-clientsession',
@@ -22,8 +21,7 @@ export class ClientsessionComponent implements OnInit {
   maxSession:number;
   constructor(private _userService: UserServiceService,
               private _fb: FormBuilder,
-              private _router: Router,
-              private notify: NotificationService){
+              private _router: Router){
     this.sessionIndex = 0;
     this.maxSession = 0;
   }
@@ -44,7 +42,7 @@ export class ClientsessionComponent implements OnInit {
 
   onClientNameChange(clientId) {
     if (clientId) {
-      this._userService.getAllSessionsByClientId(clientId,12).subscribe((sessionResponse) => {
+      this._userService.getAllSessionsByClientId(clientId,12345).subscribe((sessionResponse) => {
         this.clientSessionDetails = sessionResponse;
         this.clientSessionDetails.sessions.sort((s1, s2) => this.compareSessionDate(s1, s2));
         if (this.clientSessionDetails.sessions.length > 0) {
@@ -151,12 +149,6 @@ export class ClientsessionComponent implements OnInit {
   }
 
   onBookClick() {
-    this.show('Token Booked successfully', 'success');
     this._router.navigate(['/book'], {queryParams : {clientName : this.currentSession.clientName, sessionId : this.currentSession.sessionId}});
   }
-
-  show(text: string, type: string): void {
-    this.notify.show(text, { position:'bottom', duration:'2000', type: 'success' });
-  }
-
 }

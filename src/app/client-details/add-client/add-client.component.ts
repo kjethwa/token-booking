@@ -7,6 +7,7 @@ import { ClientServiceService } from "../../service/client-service.service";
 import { ClientOperation } from "../../model/ClientOperaion";
 import { forEach } from "@angular/router/src/utils/collection";
 import { PropertySericeService } from "../../service/property-serice.service";
+import { NotificationService } from "ng2-notify-popup";
 
 @Component({
   selector: 'app-add-client',
@@ -25,7 +26,8 @@ export class AddClientComponent implements OnInit {
     private _router: Router,
     private _clientService: ClientServiceService,
     private _activatedRoute: ActivatedRoute,
-    private _propertyService: PropertySericeService) {
+    private _propertyService: PropertySericeService,
+    private _notify: NotificationService) {
 
   }
 
@@ -65,10 +67,13 @@ export class AddClientComponent implements OnInit {
     console.log('clientDetails', clientDetails);
     if (this.clientAddForm.valid && this.clientAddForm.get('daysOfOperation').value.length > 0) {
       this._clientService.addClients(clientDetails).subscribe((res) => {
-        console.log(res);
-      })
+        this._notify.show('Token Booked successfully', { position:'bottom', duration:'2000', type: 'success' });
+        this._router.navigate(['/search']);
+      }, (err) => {
+        this._notify.show('Error occurred while creating Client', { position:'bottom', duration:'2000', type: 'error' });
+      });
     } else {
-      alert('Please enter mandatory fields');
+      this._notify.show('Please enter mandatory fields', { position:'bottom', duration:'2000', type: 'error' });
     }
 
   }
@@ -94,9 +99,9 @@ export class AddClientComponent implements OnInit {
 
   onUpdateClientClick() {
     const clientDetails = this.clientAddForm.getRawValue();
-
     this._clientService.updateClient(clientDetails).subscribe((res) => {
-      console.log(res);
+      this._notify.show('Token Booked successfully', { position:'bottom', duration:'2000', type: 'success' });
+      this._router.navigate(['/search']);
     })
   }
 }
