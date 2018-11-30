@@ -12,6 +12,7 @@ import { ClientsessionComponent } from "app/user-screen/clientsession/clientsess
 import { AddClientComponent } from "app/client-details/add-client/add-client.component";
 import { SearchClientComponent } from "app/client-details/search-client/search-client.component";
 import { TokenInfoComponent } from "app/user-screen/clientsession/partials/token-info/token-info.component";
+import { ViewBookingsComponent } from "app/user-screen/clientsession/partials/view-bookings/view-bookings.component";
 
 export const AppRoutes: Routes = [
     {
@@ -72,5 +73,9 @@ export const AppRoutes: Routes = [
     {
         path: 'book',
         component: TokenInfoComponent
+    },
+    {
+        path: 'bookings/view',
+        component: ViewBookingsComponent
     }
 ]

@@ -22,7 +22,7 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 export const subRoutes: RouteInfo[] = [
-    { path: 'view', title: 'View Token',  icon:'ti-view-list-alt', class: '' },
+    { path: 'bookings/view', title: 'View Token',  icon:'ti-view-list-alt', class: '' },
     { path: 'cancel', title: 'Cancel Token',  icon:'ti-text', class: '' },
     { path: 'submit', title: 'Submit Token',  icon:'ti-pencil-alt2', class: '' },
 ]

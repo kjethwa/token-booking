@@ -39,7 +39,7 @@ export class TokenInfoComponent implements OnInit {
   onConfirmClick() {
     const requestBody = {
       sessionId : this.currentSession.sessionId,
-      userId: '12345',
+      userId: '345',
       tokenNumber: this.nextAvailableToken
     };
     this._userService.confirmBooking(requestBody).subscribe((response) => {
