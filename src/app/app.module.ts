@@ -37,6 +37,8 @@ import { UserService } from "app/service/user.service";
 import { TokenInfoComponent } from "app/user-screen/clientsession/partials/token-info/token-info.component";
 import { NgNotifyPopup } from 'ng2-notify-popup';
 import { NotificationService } from "ng2-notify-popup";
+import { ViewBookingsComponent } from "app/user-screen/clientsession/partials/view-bookings/view-bookings.component";
+import { ManageBookingService } from "app/service/manage-booking.service";
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { NotificationService } from "ng2-notify-popup";
     ValidationDirective,
     ClientsessionComponent,
     CurrentSessionComponent,
-    TokenInfoComponent
+    TokenInfoComponent,
+    ViewBookingsComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { NotificationService } from "ng2-notify-popup";
     PropertySericeService,
     UserServiceService,
     UserService,
-    NotificationService
+    NotificationService,
+    ManageBookingService
     ],
   bootstrap: [AppComponent]
 })

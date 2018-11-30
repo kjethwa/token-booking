@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Session } from '../../../../model/Session';
 import { Input } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserServiceService } from "app/service/user-service.service";
+import { NotificationService } from "ng2-notify-popup";
 
 @Component({
   selector: 'app-token-info',
@@ -16,7 +17,9 @@ export class TokenInfoComponent implements OnInit {
     sessionId : ''
   };
   constructor(private _activatedRouter : ActivatedRoute,
-              private _userService : UserServiceService) { }
+              private _userService : UserServiceService,
+              private _notify: NotificationService,
+              private _router: Router) { }
 
   ngOnInit() {
     this._activatedRouter.queryParams.subscribe((query: any) => {
@@ -36,11 +39,14 @@ export class TokenInfoComponent implements OnInit {
   onConfirmClick() {
     const requestBody = {
       sessionId : this.currentSession.sessionId,
-      userId: '12',
+      userId: '345',
       tokenNumber: this.nextAvailableToken
     };
     this._userService.confirmBooking(requestBody).subscribe((response) => {
-      alert('Booked Successfully');
+      this._notify.show('Token Booked successfully', { position:'bottom', duration:'2000', type: 'success' });
+      this._router.navigate(['/user']);
+    }, (err) => {
+      this._notify.show('Error occurred while booking', { position:'bottom', duration:'2000', type: 'error' })
     })
   }
 

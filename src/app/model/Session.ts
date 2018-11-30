@@ -7,4 +7,6 @@ export class Session{
     availableToken: String;
     clientName: String;
     sessionId: String;
+    isBookAllowed: Boolean;
+    tokenNumber: String;
 }
