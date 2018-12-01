@@ -4,6 +4,7 @@ import { Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserServiceService } from "app/service/user-service.service";
 import { NotificationService } from "ng2-notify-popup";
+import { AppConstant } from '../../../../app-constant';
 
 @Component({
   selector: 'app-token-info',
@@ -39,12 +40,12 @@ export class TokenInfoComponent implements OnInit {
   onConfirmClick() {
     const requestBody = {
       sessionId : this.currentSession.sessionId,
-      userId: '345',
+      userId: AppConstant.userId,
       tokenNumber: this.nextAvailableToken
     };
     this._userService.confirmBooking(requestBody).subscribe((response) => {
       this._notify.show('Token Booked successfully', { position:'bottom', duration:'2000', type: 'success' });
-      this._router.navigate(['/user']);
+      this._router.navigate(['/bookings/view']);
     }, (err) => {
       this._notify.show('Error occurred while booking', { position:'bottom', duration:'2000', type: 'error' })
     })

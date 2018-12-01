@@ -39,6 +39,7 @@ import { NgNotifyPopup } from 'ng2-notify-popup';
 import { NotificationService } from "ng2-notify-popup";
 import { ViewBookingsComponent } from "app/user-screen/clientsession/partials/view-bookings/view-bookings.component";
 import { ManageBookingService } from "app/service/manage-booking.service";
+import { UtilService } from "app/service/util.service";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ManageBookingService } from "app/service/manage-booking.service";
     UserServiceService,
     UserService,
     NotificationService,
-    ManageBookingService
+    ManageBookingService,
+    UtilService
     ],
   bootstrap: [AppComponent]
 })

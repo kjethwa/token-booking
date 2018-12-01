@@ -1,13 +1,19 @@
+<div class="container-fluid">
+
 <ul class="nav nav-tabs">
   <li role="presentation" [ngClass]="{'active': currentTabName === 'Booked'}"><a (click)="onTabClick('Booked')">Booked</a></li>
-  <li role="presentation" [ngClass]="{'active': currentTabName === 'Submitted'}"><a (click)="onTabClick('Submitted')">Submitted</a></li>
   <li role="presentation" [ngClass]="{'active': currentTabName === 'Cancelled'}"><a (click)="onTabClick('Cancelled')">Cancelled</a></li>
+  <li role="presentation" [ngClass]="{'active': currentTabName === 'Completed'}"><a (click)="onTabClick('Completed')">Completed</a></li>
 </ul>
 
-<h1>{{currentTabName}}</h1>
-
 <ng-container *ngFor="let booking of listOfBookings;let i = index">
-    
+  <ng-container *ngIf="booking.status === currentTabName.toUpperCase()">
+    <app-current-session [currentSession]="booking" (cancelledBooking)="onCancelClick($event, i)"></app-current-session>
+  </ng-container>
 </ng-container>
+<ng-container *ngIf="!listOfBookings.length">
+  <div class="text-center">No bookings available</div>
+</ng-container>
+</div>
 
 

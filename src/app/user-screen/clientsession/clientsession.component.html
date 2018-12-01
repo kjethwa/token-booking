@@ -9,9 +9,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <select class="form-control border-input" formControlName="clientId" (change)="onClientNameChange(clientSessionForm.get('clientId').value)">
-          <option value="">Select</option>
-          <option *ngFor="let value of allActiveClientName" [value]="value.clientId">{{ value.clientName }}</option>
-        </select>
+                                <option value="">Select</option>
+                                <option *ngFor="let value of allActiveClientName" [value]="value.clientId">{{ value.clientName }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
