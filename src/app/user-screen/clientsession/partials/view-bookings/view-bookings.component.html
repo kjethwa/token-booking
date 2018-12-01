@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs">
+  <li role="presentation" [ngClass]="{'active': currentTabName === 'Booked'}"><a (click)="onTabClick('Booked')">Booked</a></li>
+  <li role="presentation" [ngClass]="{'active': currentTabName === 'Submitted'}"><a (click)="onTabClick('Submitted')">Submitted</a></li>
+  <li role="presentation" [ngClass]="{'active': currentTabName === 'Cancelled'}"><a (click)="onTabClick('Cancelled')">Cancelled</a></li>
+</ul>
+
+<h1>{{currentTabName}}</h1>
+
+<ng-container *ngFor="let booking of listOfBookings;let i = index">
+    
+</ng-container>
+
+
