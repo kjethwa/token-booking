@@ -1,4 +1,4 @@
-export class Session{
+export class Session {
     date: String;
     day : String;
     address: String;
@@ -9,4 +9,5 @@ export class Session{
     sessionId: String;
     isBookAllowed: Boolean;
     tokenNumber: String;
+    status: String;
 }

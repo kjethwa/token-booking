@@ -6,8 +6,10 @@
           <div class="row">
             <div class="col-xs-4">
               <div class="icon-big icon-warning text-center">
-                <i class="ti-alarm-clock"></i>
+                <i [ngClass]="{'ti-alarm-clock' : currentSession?.address}"></i>
+                <div *ngIf="!currentSession?.address">{{currentSession?.tokenNumber}}</div>
               </div>
+              <div *ngIf="!currentSession?.address" class="text-center">{{currentSession?.status | titlecase  }}</div>
             </div>
             <div class="col-xs-8">
               <div class="numbers">
@@ -20,39 +22,18 @@
           <div class="footer">
             <hr />
             <div class="stats">
-              Session Date and Time
+              {{currentSession?.address ? 'Session Date and Time' : currentSession?.clientName}}
+            </div>
+            <div class="pull-right" *ngIf="!(currentSession?.address || currentSession?.status !== 'BOOKED')">
+              <button class="btn btn-success btn-fill">Submit</button>
+              <button class="btn btn-danger btn-fill" (click)="onCancelBookingClick(currentSession?.bookingId)">Cancel</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!--<div class="col-md-4">
-      <div class="card">
-        <div class="content">
-          <div class="row">
-            <div class="col-xs-5">
-              <div class="icon-big icon-warning text-center">
-                <i class="ti-alarm-clock"></i>
-              </div>
-            </div>
-            <div class="col-xs-7">
-              <div class="numbers">
-                <p>{{currentSession?.fromTime}} {{currentSession?.toTime}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="footer">
-            <hr />
-            <div class="stats">
-              Session Time
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
-
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="currentSession?.address">
       <div class="card">
         <div class="content">
           <div class="row">
@@ -78,26 +59,3 @@
     </div>
   </div>
 </ng-container>
-
-<!--<div class="input-group mb-3">
-  <div class="input-group-addon">
-    <div class="form-control border-input"><i class="fa fa-calendar"></i></div>
-  </div>
-  <div class="form-control border-input">{{currentSession?.date}} {{currentSession?.day}}</div>
-</div>-->
-
-<!--<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <div class="form-control input-group-text"><i class="fa fa-clock-o"></i></div>
-  </div>
-  <div class="form-control">{{currentSession?.fromTime}}</div>
-  <div class="form-control">{{currentSession?.toTime}}</div>
-</div>-->
-
-<!--<div class="input-group">
-  <div class="input-group-prepend">
-    <div class="form-control input-group-text address-height"><i class="fa fa-address-card-o"></i></div>
-  </div>
-  <div class="form-control address-height">{{currentSession?.address}}</div>
-</div>
-</div>-->
