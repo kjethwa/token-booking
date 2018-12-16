@@ -1,23 +1,47 @@
-<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <!--<label for="username">Username</label>-->
-        <input type="text" formControlName="username" class="form-control noFocus" placeholder="Enter User Name" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
+<div class="modal fade seminor-login-modal" data-backdrop="false" id={{id}}>
+    <div id="otp-button"></div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                </button>
+                <h5 class="modal-title"><b>Login or Sign up with Q-Assist</b></h5>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body seminor-login-modal-body">
+                <div class="row">
+                    <div class="col-xs-12 xol-md-12 col-sm-12">
+                        <div class="header">
+                            <h4 class="title">Welcome to Q-Assist!!</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="loginForm" class="seminor-login-form">
+                    <ng-container *ngIf="!isOTPVisible()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" required autocomplete="off" formControlName="mobile"
+                            validateInput restrict="number" [maxlength]="mobileLength">
+                            <label class="form-control-placeholder" for="name">Mobile Number</label>
+                        </div>
+                        <div class="btn-check-log text-center">
+                            <button type="submit" id="otp-button" class="btn-simple btn-wd btn-fill" (click)="onContinueClick()">Login Securely</button>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="isOTPVisible()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" required autocomplete="off"
+                            validateInput restrict="number" maxlength="6" formControlName="mobileOtp">
+                            <label class="form-control-placeholder" for="name">OTP</label>
+                        </div>
+                        <div class="btn-check-log text-center">
+                            <button type="submit" class="btn-simple btn-wd btn-fill" (click)="onVerifyClick()">Verify</button>
+                        </div>
+                    </ng-container>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <!--<label for="password">Password</label>-->
-        <input type="password" formControlName="password" class="form-control noFocus" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group text-center">
-        <button class="btn btn-link"><i class="fa fa-sign-in fa-2x"></i></button>
-        <!--<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />-->
-        <button class="btn btn-link" [routerLink]="['/register']"><i class="fa fa-user-plus fa-2x"></i></button>
-        <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
-    </div>
-</form>
+</div>

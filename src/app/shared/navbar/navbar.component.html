@@ -33,9 +33,9 @@
                       </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="ti-settings"></i>
-                        <p>Settings</p>
+                    <a data-toggle="modal" data-target="#exampleModalCenter">
+                        <i class="ti-user"></i>
+                        <p>Login</p>
                     </a>
                 </li>
             </ul>
@@ -43,3 +43,6 @@
         </div>
     </div>
 </nav>
+
+<app-login [id]="'exampleModalCenter'"></app-login>
+

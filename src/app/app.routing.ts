@@ -5,7 +5,7 @@ import { UserComponent }   from './user/user.component';
 import { TableComponent }   from './table/table.component';
 import { TypographyComponent }   from './typography/typography.component';
 import { IconsComponent }   from './icons/icons.component';
-import { MapsComponent }   from './maps/maps.component';
+// import { MapsComponent }   from './maps/maps.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { ClientsessionComponent } from "app/user-screen/clientsession/clientsession.component";
@@ -13,6 +13,8 @@ import { AddClientComponent } from "app/client-details/add-client/add-client.com
 import { SearchClientComponent } from "app/client-details/search-client/search-client.component";
 import { TokenInfoComponent } from "app/user-screen/clientsession/partials/token-info/token-info.component";
 import { ViewBookingsComponent } from "app/user-screen/clientsession/partials/view-bookings/view-bookings.component";
+import { LoginComponent } from "app/login/login.component";
+import { RegisterComponent } from "app/register";
 
 export const AppRoutes: Routes = [
     {
@@ -40,10 +42,10 @@ export const AppRoutes: Routes = [
         path: 'icons',
         component: IconsComponent
     },
-    {
-        path: 'maps',
-        component: MapsComponent
-    },
+    // {
+    //     path: 'maps',
+    //     component: MapsComponent
+    // },
     {
         path: 'notifications',
         component: NotificationsComponent
@@ -77,5 +79,13 @@ export const AppRoutes: Routes = [
     {
         path: 'bookings/view',
         component: ViewBookingsComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     }
 ]

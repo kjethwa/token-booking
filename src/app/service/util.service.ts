@@ -61,5 +61,9 @@ export class UtilService {
     });
     return address.substring(0, address.length - 1);
   }
+
+  getWindowRef() {
+    return window;
+  }
   
 }
