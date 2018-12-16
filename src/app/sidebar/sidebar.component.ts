@@ -14,6 +14,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'search', title: 'MDM - Search Client',  icon:'ti-search', class: '' },
     { path: 'user', title: 'Book Token',  icon:'ti-user', class: '' },
     { path: 'bookings/view', title: 'Manage Bookings',  icon:'ti-settings', class: '' },
+    // { path: 'login', title: 'Login',  icon:'ti-user', class: '' },
 ];
 
 @Component({

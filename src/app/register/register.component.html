@@ -3,7 +3,7 @@
         <div class="header-color">Sign up Q-Assist</div>
     </div>
 </div>
-<form [formGroup]="registerForm">
+<!--<form [formGroup]="registerForm">
     <div class="form-group" *ngIf="pageCount === 1">
         <input type="text" formControlName="firstName" validateInput restrict="alpha" placeholder="Enter First Name" class="form-control"
         [ngClass]="{ 'is-invalid': !validInputs.firstName }" (change)="onChangeInput($event, 3, 'firstName')"/>
@@ -49,4 +49,4 @@
         <button *ngIf="pageCount < 3" class="btn btn-link right" (click)="onNextClick()" [disabled]="isDisabled()"><i class="fa fa-chevron-circle-right fa-2x"></i></button>
         <button [disabled]="isSubmitDisabled()" *ngIf="pageCount === 3" class="btn btn-link right" (click)="onSubmit()" ><i class="fa fa-thumbs-o-up fa-2x"></i></button>
     </div>
-</form>
+</form>-->
