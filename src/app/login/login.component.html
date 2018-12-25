@@ -1,46 +1,52 @@
 <div class="modal fade seminor-login-modal" data-backdrop="false" id={{id}}>
-    <div id="otp-button"></div>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span><i class="fa fa-times-circle" aria-hidden="true"></i></span>
                 </button>
-                <h5 class="modal-title"><b>Login or Sign up with Q-Assist</b></h5>
+                <ul class="nav nav-tabs" id="tabContent">
+                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                    <li><a href="#signup" data-toggle="tab">Sign-up</a></li>
+                </ul>
             </div>
 
-            <!-- Modal body -->
             <div class="modal-body seminor-login-modal-body">
-                <div class="row">
-                    <div class="col-xs-12 xol-md-12 col-sm-12">
-                        <div class="header">
-                            <h4 class="title">Welcome to Q-Assist!!</h4>
-                        </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="login">
+                        <form [formGroup]="loginForm" class="seminor-login-form">
+                            <ng-container *ngIf="!isOTPVisible()">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" required autocomplete="off"
+                                           formControlName="mobile"
+                                           validateInput restrict="number" [maxlength]="mobileLength">
+                                    <label class="form-control-placeholder" for="name">Mobile Number</label>
+                                </div>
+                                <div class="btn-check-log text-center">
+                                    <button type="submit" id="otp-button" class="btn-simple btn-wd btn-fill"
+                                            (click)="onContinueClick()">Login Securely
+                                    </button>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="isOTPVisible()">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" required autocomplete="off"
+                                           validateInput restrict="number" maxlength="6" formControlName="mobileOtp">
+                                    <label class="form-control-placeholder" for="name">OTP</label>
+                                </div>
+                                <div class="btn-check-log text-center">
+                                    <button type="submit" class="btn-simple btn-wd btn-fill" (click)="onVerifyClick()">
+                                        Verify
+                                    </button>
+                                </div>
+                            </ng-container>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane" id="signup">
+                        content 0
                     </div>
                 </div>
-
-                <form [formGroup]="loginForm" class="seminor-login-form">
-                    <ng-container *ngIf="!isOTPVisible()">
-                        <div class="form-group">
-                            <input type="text" class="form-control" required autocomplete="off" formControlName="mobile"
-                            validateInput restrict="number" [maxlength]="mobileLength">
-                            <label class="form-control-placeholder" for="name">Mobile Number</label>
-                        </div>
-                        <div class="btn-check-log text-center">
-                            <button type="submit" id="otp-button" class="btn-simple btn-wd btn-fill" (click)="onContinueClick()">Login Securely</button>
-                        </div>
-                    </ng-container>
-                    <ng-container *ngIf="isOTPVisible()">
-                        <div class="form-group">
-                            <input type="text" class="form-control" required autocomplete="off"
-                            validateInput restrict="number" maxlength="6" formControlName="mobileOtp">
-                            <label class="form-control-placeholder" for="name">OTP</label>
-                        </div>
-                        <div class="btn-check-log text-center">
-                            <button type="submit" class="btn-simple btn-wd btn-fill" (click)="onVerifyClick()">Verify</button>
-                        </div>
-                    </ng-container>
-                </form>
             </div>
         </div>
     </div>
