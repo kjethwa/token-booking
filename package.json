@@ -27,7 +27,7 @@
     "core-js": "2.4.1",
     "express": "4.15.3",
     "jquery": "1.12.4",
-    "moment": "2.18.1",
+    "moment": "2.29.4",
     "ng2-notify-popup": "^0.1.25",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.0.0",
